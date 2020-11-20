@@ -1,20 +1,18 @@
-import Head from 'next/head'
-import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
-import Link from 'next/link'
+import Head from "next/head";
+import Link from "next/link";
 
-const name = '[Your Name]'
-export const siteTitle = 'Next.js Sample Website'
+const name = "Astillero Vanoli";
+export const siteTitle = "Astillero Vanoli";
 
 export default function Layout({
   children,
-  home
+  home,
 }: {
-  children: React.ReactNode
-  home?: boolean
+  children: React.ReactNode;
+  home?: boolean;
 }) {
   return (
-    <div className={styles.container}>
+    <div className="bg-black">
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -30,43 +28,70 @@ export default function Layout({
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <header className={styles.header}>
-        {home ? (
-          <>
-            <img
-              src="/images/profile.jpg"
-              className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
-              alt={name}
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
+      <header className="w-full z-30 top-0 text-white">
+        <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+          <div className="pl-4 flex items-center">
             <Link href="/">
-              <a>
-                <img
-                  src="/images/profile.jpg"
-                  className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-                  alt={name}
-                />
+              <a className="text-white no-underline hover:no-underline font-bold text-2xl lg:text-xl">
+                ASTILLERO VANOLI
               </a>
             </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
-              </Link>
-            </h2>
-          </>
-        )}
-      </header>
-      <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
+          </div>
+          <div className="block lg:hidden pr-4">
+            <button
+              id="nav-toggle"
+              className="flex items-center p-1 text-orange-800 hover:text-gray-900"
+            >
+              <svg
+                className="fill-current h-6 w-6"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20"
+            id="nav-content"
+          >
+            <ul className="list-reset lg:flex justify-end flex-1 items-center">
+              <li className="mr-3">
+                <Link href="/">
+                  <a className="inline-block text-white py-2 px-4 no-underline">
+                    Inicio
+                  </a>
+                </Link>
+              </li>
+              <li className="mr-3">
+                <Link href="/">
+                  <a className="inline-block text-white py-2 px-4 no-underline">
+                    Noticias
+                  </a>
+                </Link>
+              </li>
+            </ul>
+            <button
+              id="navAction"
+              className="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 rounded-full mt-2 lg:mt-0 py-1 px-2"
+            >
+              Contactanos
+            </button>
+          </div>
         </div>
-      )}
+      </header>
+      <main className="w-full h-screen overflow-y-scroll leading-normal tracking-normal text-white">
+        {children}
+      </main>
+      <footer>
+        <div>
+          <p className="mt-8 text-base leading-6 text-center text-gray-400">
+            © 2020 Aloncar SA, Todos los derechos reservados
+          </p>
+        </div>
+      </footer>
     </div>
-  )
+  );
 }
